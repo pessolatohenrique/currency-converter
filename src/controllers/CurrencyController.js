@@ -15,22 +15,12 @@ class CurrencyController {
           .json({ message: "Price must be valid and above 0 " });
       }
 
-      const response = await axios.get(
-        "https://api.exchangeratesapi.io/latest?base=BRL&symbols=USD,EUR,INR"
+      const response = await model.getExchanges();
+
+      const valuesCalcutated = await model.mapExchanges(
+        response.data.rates,
+        price
       );
-
-      const valuesCalcutated = Object.keys(response.data.rates).map((key) => {
-        const value = response.data.rates[key];
-        const singleValue = value < 1 ? 1 / value : 1 * value;
-        const convertedPrice = price * value;
-
-        return {
-          code: key,
-          comparative: value.toFixed(2),
-          single: singleValue.toFixed(2),
-          price: convertedPrice.toFixed(2),
-        };
-      });
 
       return res.status(200).json(valuesCalcutated);
     } catch (error) {
