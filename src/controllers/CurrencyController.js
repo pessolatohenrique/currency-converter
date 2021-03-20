@@ -1,4 +1,5 @@
 const model = require("../models").Currency;
+const { Validators } = require("../utils");
 const axios = require("axios");
 
 class CurrencyController {
@@ -8,9 +9,7 @@ class CurrencyController {
     try {
       const { price } = req.query;
 
-      const isNumeric = /^-?\d+$/.test(price);
-
-      if (!price || price <= 0 || !isNumeric) {
+      if (Validators.checkPositiveNumber(price)) {
         return res
           .status(400)
           .json({ message: "Price must be valid and above 0 " });
