@@ -16,6 +16,17 @@ class AuthMiddleware {
       return next();
     })(req, res, next);
   }
+
+  static async bearer(req, res, next) {
+    passport.authenticate("bearer", { session: false }, (error, user, info) => {
+      if (error) {
+        return res.status(401).json({ message: error });
+      }
+
+      req.user = user;
+      return next();
+    })(req, res, next);
+  }
 }
 
 module.exports = AuthMiddleware;

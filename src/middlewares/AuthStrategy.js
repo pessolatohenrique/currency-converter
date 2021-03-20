@@ -1,7 +1,9 @@
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 const LocalStrategy = require("passport-local").Strategy;
+const BearerStrategy = require("passport-http-bearer").Strategy;
 const User = require("../models").User;
 
 passport.use(
@@ -34,4 +36,16 @@ passport.use(
       }
     }
   )
+);
+
+passport.use(
+  new BearerStrategy(async (token, done) => {
+    try {
+      const payload = await jwt.verify(token, process.env.JWT_KEY);
+      const user = await User.findOne({ where: { id: payload.id } });
+      done(null, user);
+    } catch (error) {
+      done(error);
+    }
+  })
 );
