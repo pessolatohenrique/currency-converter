@@ -1,6 +1,5 @@
 const model = require("../models").Currency;
 const { Validators } = require("../utils");
-const axios = require("axios");
 
 class CurrencyController {
   static async index(req, res) {
