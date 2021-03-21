@@ -5,11 +5,7 @@ class AuthMiddleware {
   static async local(req, res, next) {
     passport.authenticate("local", { session: false }, (error, user, info) => {
       if (error) {
-        return res.status(401).json({ message: error });
-      }
-
-      if (!user) {
-        return res.status(400).json({ message: "User does not exists" });
+        return res.status(401).json({ message: String(error) });
       }
 
       req.user = user;
@@ -21,6 +17,10 @@ class AuthMiddleware {
     passport.authenticate("bearer", { session: false }, (error, user, info) => {
       if (error) {
         return res.status(401).json({ message: error });
+      }
+
+      if (!user) {
+        return res.status(401).json({ message: "Token is required" });
       }
 
       req.user = user;

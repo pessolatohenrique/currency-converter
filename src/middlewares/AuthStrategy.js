@@ -22,12 +22,12 @@ passport.use(
         });
 
         if (!user) {
-          done("User not found", null);
+          throw new Error("User does not exists");
         }
 
         const verifyPassword = await bcrypt.compare(password, user.password);
         if (!verifyPassword) {
-          done("Invalid username or password", null);
+          throw new Error("Invalid username or password");
         }
 
         done(null, user);

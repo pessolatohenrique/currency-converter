@@ -3,7 +3,9 @@ const { Validators } = require("../utils");
 const axios = require("axios");
 
 class CurrencyController {
-  static async index(req, res) {}
+  static async index(req, res) {
+    return res.status(200).json({ message: "Welcome to the Currency module" });
+  }
 
   static async calculate(req, res) {
     try {

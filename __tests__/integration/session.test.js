@@ -1,6 +1,8 @@
 const request = require("supertest");
 const app = require("../../src");
 
+const URL_CURRENCY = "/currency";
+
 describe("Authentication", () => {
   it("should authenticate with valid credentials (e-mail and password)", async () => {
     const response = await request(app).post("/user/login").send({
@@ -10,14 +12,60 @@ describe("Authentication", () => {
 
     expect(response.status).toBe(204);
   });
-});
 
-/**
- * - autenticação com usuário (usuário e senha)
- * - autenticação com credencias inválidas
- * - autenticação com usuário que não existe
- * - acesso em rota com token válido
- * - acesso em rota com token inválido
- * - acesso em rota sem o token
- * set('Authorization', `Bearer ${token}`)
- */
+  it("should authenticate with valid credentials (username and password)", async () => {
+    const response = await request(app).post("/user/login").send({
+      email: "pessolatohenrique",
+      password: "admin@123",
+    });
+
+    expect(response.status).toBe(204);
+  });
+
+  it("should not authenticate with invalid credentials", async () => {
+    const response = await request(app).post("/user/login").send({
+      email: "pessolatohenrique",
+      password: "senha-incorreta",
+    });
+
+    expect(response.status).toBe(401);
+  });
+
+  it("should not authenticate when user not exists", async () => {
+    const response = await request(app).post("/user/login").send({
+      email: "usuariofake",
+      password: "senha-incorreta",
+    });
+
+    expect(response.status).toBe(401);
+  });
+
+  it("shoud allow request with valid token", async () => {
+    const responseToken = await request(app).post("/user/login").send({
+      email: "pessolatohenrique",
+      password: "admin@123",
+    });
+
+    const response = await request(app)
+      .get(URL_CURRENCY)
+      .set({ Authorization: `Bearer ${responseToken.headers.authorization}` })
+      .send();
+
+    expect(response.status).toBe(200);
+  });
+
+  it("should not allow request without token", async () => {
+    const response = await request(app).get(URL_CURRENCY).send();
+
+    expect(response.status).toBe(401);
+  });
+
+  it("should not allow request with invalid token", async () => {
+    const response = await request(app)
+      .get(URL_CURRENCY)
+      .set({ Authorization: `Bearer 12345` })
+      .send();
+
+    expect(response.status).toBe(401);
+  });
+});
