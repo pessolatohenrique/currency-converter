@@ -51,4 +51,13 @@ describe("Currency", () => {
 
     expect(response.status).toBe(400);
   });
+
+  it("should not calculate when is string price", async () => {
+    const response = await request(app)
+      .get(`${URL_CURRENCY_CALCULATE}?price=abcd`)
+      .set("Authorization", `Bearer ${token}`)
+      .send();
+
+    expect(response.status).toBe(400);
+  });
 });
