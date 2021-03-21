@@ -27,9 +27,7 @@ Execute os "seeders" disponíveis, por meio do comando:
 
 E, por fim, rode o projeto:
 
-```
-  npm start
-```
+    npm start
 
 ### Comandos importantes
 
@@ -48,6 +46,11 @@ Criar arquivo .env.test e configurar as variáveis de ambiente, semelhantes ao a
 Execute os testes disponíveis, por meio do comando:
 
     npm run test
+
+Para executar testes em um arquivo específico, executar o comando:
+
+    npm run test -- filename.test.js
+    Exemplo: npm run test -- currency.test.js
 
 Para visualização de reports, acessar o caminho abaixo
 
