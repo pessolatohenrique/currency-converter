@@ -15,7 +15,7 @@ Acesse a pasta do projeto e rode o comando para instalar as dependências npm:
 
     npm install
 
-Criar arquivo .env e configurar as variáveis de ambiente, semelhantes ao arquivo ".env-example".
+Criar arquivo .env e configurar as variáveis de ambiente, semelhantes ao arquivo ".env-example". O conteúdo da chave "JWT_KEY" deve ser uma String, que faz parte do processo de criação de um token
 
 Execute as "migrations" disponíveis, por meio do comando abaixo. O banco de dados configurado em ".env" deve estar previamente criado:
 
@@ -40,6 +40,18 @@ Para utilização do sequelize em linha de comando (CLI), utilizar:
 Por exemplo:
 
     npx sequelize-cli --help
+
+### Execução de testes por meio do Jest
+
+Criar arquivo .env.test e configurar as variáveis de ambiente, semelhantes ao arquivo ".env.test-example". Este arquivo será utilizado para geração de testes, baseados em TDD. O conteúdo da chave "JWT_KEY" deve ser uma String, que faz parte do processo de criação de um token
+
+Execute os testes disponíveis, por meio do comando:
+
+    npm run test
+
+Para visualização de reports, acessar o caminho abaixo
+
+    __tests__/coverage/Icov-report/index.html
 
 ### Observações
 

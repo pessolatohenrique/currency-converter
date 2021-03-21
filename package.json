@@ -4,8 +4,10 @@
   "description": "Realizar cálculos de conversões de moedas, baseados no preço e quantidade de um produto",
   "main": "./src/index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./src/index.js --ignore __tests__",
+    "pretest": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all",
+    "test": "NODE_ENV=test jest",
+    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,8 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "jest": "25.0.0",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
   }
 }

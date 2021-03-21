@@ -16,7 +16,7 @@ class UserController {
   static async login(req, res) {
     const token = await UserController.createToken(req.user);
     res.set({ Authorization: token });
-    return res.send(204);
+    return res.sendStatus(204);
   }
 }
 

@@ -5,6 +5,9 @@ const passport = require("passport");
 const app = express();
 app.use(passport.initialize());
 routes(app);
-app.listen(3000, () => console.log("Server Started"));
+
+if (process.env.NODE_ENV !== "test") {
+  app.listen(3000, () => console.log("Server Started"));
+}
 
 module.exports = app;
