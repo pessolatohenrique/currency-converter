@@ -56,6 +56,13 @@ Para visualização de reports, acessar o caminho abaixo
 
     __tests__/coverage/Icov-report/index.html
 
+### Documentação por meio do Swagger
+
+Para visualizar os endpoints criados, acessar o caminho
+
+    /api-docs
+    Exemplo: http://localhost:3000/api-docs/
+
 ### Observações
 
 Os endpoints criados podem ser importados por meio do arquivo "endpoints.json" em um Software como o Postman (ou semelhante).

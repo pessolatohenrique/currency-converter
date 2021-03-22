@@ -1,81 +1,21 @@
 {
 	"info": {
-		"_postman_id": "c7f354fd-f542-4121-a90b-8ab11e59db6e",
-		"name": "Template Node",
+		"_postman_id": "50a887d4-fb31-4759-bcc5-99701a601cf1",
+		"name": "Currency Converter",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "author",
+			"name": "user",
 			"item": [
 				{
-					"name": "index",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/author",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"author"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "show",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/author/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"author",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "books",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/author/2/books",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"author",
-								"2",
-								"books"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "store",
+					"name": "login",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"George Orwell\"\n}",
+							"raw": "{\n\t\"email\": \"pessolatohenrique@gmail.com\",\n\t\"password\": \"admin@123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -83,105 +23,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/author",
+							"raw": "http://localhost:3000/user/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"author"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"George Orwell\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/author/9",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"author",
-								"9"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/author/12",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"author",
-								"12"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "restore",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/author/1/restore",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"author",
-								"1",
-								"restore"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "count books",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/author/count/books",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"author",
-								"count",
-								"books"
+								"user",
+								"login"
 							]
 						}
 					},
@@ -191,7 +41,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "book",
+			"name": "currency",
 			"item": [
 				{
 					"name": "index",
@@ -199,72 +49,51 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/book?search=hercules",
+							"raw": "http://localhost:3000/currency",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"book"
+								"currency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "calculate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNjE2MzU0NTc4LCJleHAiOjE2MTYzNTc1Nzh9.wTfSJFg6TM0jVqGHzHZON37a7amMrm7qrV09UCH1Qyc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/currency/calculate?price=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"currency",
+								"calculate"
 							],
 							"query": [
 								{
-									"key": "search",
-									"value": "hercules"
+									"key": "price",
+									"value": "1"
 								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "sum pages by author",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/book/sumPagesByAuthor",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"book",
-								"sumPagesByAuthor"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "count by author",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/book/countByAuthor",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"book",
-								"countByAuthor"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "show",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
 						}
 					},
 					"response": []
