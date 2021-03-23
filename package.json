@@ -1,15 +1,17 @@
 {
-  "name": "template-node-sequelize",
+  "name": "currency-converter",
   "version": "1.0.0",
-  "description": "Template para Node.js com o framework ORM Sequelize",
+  "description": "Realizar cálculos de conversões de moedas, baseados no preço e quantidade de um produto",
   "main": "./src/index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./src/index.js --ignore __tests__",
+    "pretest": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all",
+    "test": "NODE_ENV=test jest",
+    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pessolatohenrique/template-node-sequelize.git"
+    "url": "git+https://github.com/pessolatohenrique/currency-converter.git"
   },
   "keywords": [
     "template",
@@ -19,20 +21,28 @@
   "author": "pessolatohenrique",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pessolatohenrique/template-node-sequelize/issues"
+    "url": "https://github.com/pessolatohenrique/currency-converter/issues"
   },
-  "homepage": "https://github.com/pessolatohenrique/template-node-sequelize#readme",
+  "homepage": "https://github.com/pessolatohenrique/currency-converter#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
+    "passport": "^0.4.1",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "sequelize": "^6.5.0",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "jest": "24.1.0",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
   }
 }

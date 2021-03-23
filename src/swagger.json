@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Currency Converter",
+    "description": "O objetivo deste projeto é realizar cálculos de conversões de moedas, baseados no preço e quantidade de um produto. Deste modo é possível, por exemplo, verificar preços baseados em Dólar (USD) e Euro (EUR)",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "User",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/user/login": {
+      "post": {
+        "tags": ["Users"],
+        "description": "Login and generate token to a existing user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "E-mail (or username, with field name 'email') to login",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Token is generated"
+          },
+          "401": {
+            "description": "Invalid username or password / User does not exists"
+          }
+        }
+      }
+    },
+    "/currency": {
+      "get": {
+        "tags": ["Currencies"],
+        "description": "Index of Currency Module",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Use 'Bearer' prefix",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/currency/calculate": {
+      "get": {
+        "tags": ["Currencies"],
+        "description": "Index of Currency Module",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Use 'Bearer' prefix",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "name": "price",
+            "in": "query",
+            "required": true,
+            "description": "Price of product",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Currency": {
+      "required": [],
+      "properties": {}
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/User"
+    },
+    "Currencies": {
+      "type": "array",
+      "$ref": "#/definitions/Currency"
+    }
+  }
+}
