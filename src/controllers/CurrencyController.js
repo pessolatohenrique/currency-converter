@@ -1,14 +1,29 @@
 const model = require("../models").Currency;
-const axios = require("axios");
+const { Validators } = require("../utils");
 
 class CurrencyController {
   static async index(req, res) {
+    return res.status(200).json({ message: "Welcome to the Currency module" });
+  }
+
+  static async calculate(req, res) {
     try {
-      const response = await axios.get(
-        "https://api.exchangeratesapi.io/latest?base=BRL&symbols=USD,EUR,INR"
+      const { price } = req.query;
+
+      if (Validators.checkPositiveNumber(price)) {
+        return res
+          .status(400)
+          .json({ message: "Price must be valid and above 0 " });
+      }
+
+      const response = await model.getExchanges();
+
+      const valuesCalcutated = await model.mapExchanges(
+        response.data.rates,
+        price
       );
 
-      return res.status(200).json(response.data);
+      return res.status(200).json(valuesCalcutated);
     } catch (error) {
       return res.status(500).json(error);
     }
