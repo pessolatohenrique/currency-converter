@@ -5,3 +5,4 @@ npm-debug.log
 .env.test
 .DS_Store
 __tests__/coverage/*
+.scannerwork

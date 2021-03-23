@@ -8,7 +8,7 @@ let token;
 beforeAll(async () => {
   const response = await request(app).post("/user/login").send({
     email: "pessolatohenrique@gmail.com",
-    password: "admin@123",
+    password: process.env.DEFAULT_PASSWORD,
   });
 
   token = response.header.authorization;

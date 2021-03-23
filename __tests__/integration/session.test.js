@@ -7,7 +7,7 @@ describe("Authentication", () => {
   it("should authenticate with valid credentials (e-mail and password)", async () => {
     const response = await request(app).post("/user/login").send({
       email: "pessolatohenrique@gmail.com",
-      password: "admin@123",
+      password: process.env.DEFAULT_PASSWORD,
     });
 
     expect(response.status).toBe(204);
@@ -16,7 +16,7 @@ describe("Authentication", () => {
   it("should authenticate with valid credentials (username and password)", async () => {
     const response = await request(app).post("/user/login").send({
       email: "pessolatohenrique",
-      password: "admin@123",
+      password: process.env.DEFAULT_PASSWORD,
     });
 
     expect(response.status).toBe(204);
@@ -25,7 +25,7 @@ describe("Authentication", () => {
   it("should not authenticate with invalid credentials", async () => {
     const response = await request(app).post("/user/login").send({
       email: "pessolatohenrique",
-      password: "senha-incorreta",
+      password: process.env.INCORRECT_PASSWORD,
     });
 
     expect(response.status).toBe(401);
@@ -34,7 +34,7 @@ describe("Authentication", () => {
   it("should not authenticate when user not exists", async () => {
     const response = await request(app).post("/user/login").send({
       email: "usuariofake",
-      password: "senha-incorreta",
+      password: process.env.INCORRECT_PASSWORD,
     });
 
     expect(response.status).toBe(401);
@@ -43,7 +43,7 @@ describe("Authentication", () => {
   it("shoud allow request with valid token", async () => {
     const responseToken = await request(app).post("/user/login").send({
       email: "pessolatohenrique",
-      password: "admin@123",
+      password: process.env.DEFAULT_PASSWORD,
     });
 
     const response = await request(app)

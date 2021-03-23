@@ -25,6 +25,7 @@ module.exports = {
     "!src/migrations/*",
     "!src/seeders/*",
     "!src/config/*",
+    "!src/swagger.json",
   ],
 
   // The directory where Jest should output its coverage files
